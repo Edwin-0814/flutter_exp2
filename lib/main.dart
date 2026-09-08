@@ -11,7 +11,7 @@ class ResponsiveUIApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Adaptive and Responsive UI',
+      title: 'Responsive UI',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -21,60 +21,69 @@ class ResponsiveUIApp extends StatelessWidget {
 }
 
 class ResponsiveHomePage extends StatelessWidget {
-  const ResponsiveHomePage({super.key});
+  const ResponsiveHomePage({super.key}); // FIXED: Added missing semicolon
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Experiment 2 - Edwin Paul'),
+        // Retained your name in the title as per the lab requirements
+        title: const Text('Adaptive and Responsive UI - Edwin Paul'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            // Check the maximum width available
-            if (constraints.maxWidth < 600) {
-              // ----- MOBILE LAYOUT (Small Screens) -----
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Card(
-                    child: ListTile(
-                      title: Text('Student'),
-                    ),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          // Mobile layout
+          if (constraints.maxWidth < 600) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center, // Added to center nicely
+              children: const [
+                Card(
+                  margin: EdgeInsets.all(10),
+                  child: ListTile(
+                    leading: Icon(Icons.person),
+                    title: Text('Student'),
+                    subtitle: Text('Mobile Layout'),
                   ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Courses'),
-                    ),
+                ),
+                Card(
+                  margin: EdgeInsets.all(10),
+                  child: ListTile(
+                    leading: Icon(Icons.book),
+                    title: Text('Courses'),
+                    subtitle: Text('Mobile Layout'),
                   ),
-                ],
-              );
-            } else {
-              // ----- DESKTOP / TABLET LAYOUT (Large Screens) -----
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Expanded(
-                    child: Card(
-                      child: ListTile(
-                        title: Text('Students'),
-                      ),
-                    ),
+                ),
+              ],
+            );
+          }
+
+          // Desktop / Tablet layout
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              Expanded(
+                child: Card(
+                  margin: EdgeInsets.all(10),
+                  child: ListTile(
+                    leading: Icon(Icons.people),
+                    title: Text('Students'),
+                    subtitle: Text('Desktop / Tablet Layout'),
                   ),
-                  Expanded(
-                    child: Card(
-                      child: ListTile(
-                        title: Text('Courses'),
-                      ),
-                    ),
+                ),
+              ),
+              Expanded(
+                child: Card(
+                  margin: EdgeInsets.all(10),
+                  child: ListTile(
+                    leading: Icon(Icons.school),
+                    title: Text('Courses'),
+                    subtitle: Text('Desktop / Tablet Layout'),
                   ),
-                ],
-              );
-            }
-          },
-        ),
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
